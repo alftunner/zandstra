@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  apache-php:
+    build: ./php
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "8081:80"
+    depends_on:
+      - mysql
+    links:
+      - mysql
+
+  mysql:
+    image: mysql:5.7.39
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
