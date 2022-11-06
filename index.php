@@ -3,5 +3,7 @@ spl_autoload_register(function($name) {
     require 'classes/'.$name.'.php';
 });
 
-$test = new CdProduct("test", "test", "test", 13.2, 23);
-print $test->getPlayLength();
+$dbconnect =DBConnection::getInstance();
+
+$product = ShopProduct::getInstance(1,$dbconnect);
+var_dump($product);

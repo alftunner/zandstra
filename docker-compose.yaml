@@ -2,6 +2,8 @@ version: '3'
 
 services:
   apache-php:
+    environment:
+      PHP_IDE_CONFIG: "serverName=Docker"
     build: ./php
     volumes:
       - ./:/var/www/html

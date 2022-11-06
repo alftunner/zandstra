@@ -2,10 +2,12 @@
 
 class ShopProduct
 {
+    private $id = 0;
     private $title;
     private $firstName;
     private $mainName;
     protected $price;
+    private $discount = 0;
 
     public function __construct(
         string $title,
@@ -18,6 +20,11 @@ class ShopProduct
         $this->firstName = $firstName;
         $this->mainName = $mainName;
         $this->price = $price;
+    }
+
+    public function setId(int $id)
+    {
+        $this->id = $id;
     }
 
     public function getProducer() : string
@@ -38,5 +45,54 @@ class ShopProduct
     public function getTitle()
     {
         return $this->title;
+    }
+
+    public function setDiscount(float $num)
+    {
+        $this->discount = $num;
+    }
+
+    public function getDiscount() : float
+    {
+        return $this->discount;
+    }
+
+    public static function getInstance($id, $pdo) : ShopProduct | null
+    {
+        $stmt = $pdo->prepare("select * from products where id=?");
+        $result = $stmt->execute([$id]);
+        $row = $stmt->fetch();
+        if (empty($row)) {
+            return null;
+        }
+        if ($row['type'] == 'book') {
+            $product = new BookProduct(
+                $row['title'],
+                $row['firstname'],
+                $row['mainname'],
+                (float) $row['price'],
+                (int) $row['numpages']
+            );
+        } elseif ($row['type'] == 'cd') {
+            $product = new CdProduct(
+                $row['title'],
+                $row['firstname'],
+                $row['mainname'],
+                (float) $row['price'],
+                (int) $row['playlength']
+            );
+        } else {
+            $product = new ShopProduct(
+                $row['title'],
+                $row['firstname'],
+                $row['mainname'],
+                (float) $row['price']
+            );
+        }
+        $product->setId($row['id']);
+        if (!empty($row['discount'])) {
+            $product->setDiscount($row['discount']);
+        }
+        return $product;
     }
 }
