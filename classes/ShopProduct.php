@@ -3,23 +3,15 @@
 class ShopProduct
 {
     private $id = 0;
-    private $title;
-    private $firstName;
-    private $mainName;
-    protected $price;
-    private $discount = 0;
+    private int|float $discount = 0;
 
     public function __construct(
-        string $title,
-        string $firstName,
-        string $mainName,
-        float $price
+        private string $title,
+        private string $firstName,
+        private string $mainName,
+        protected int|float $price
     )
     {
-        $this->title = $title;
-        $this->firstName = $firstName;
-        $this->mainName = $mainName;
-        $this->price = $price;
     }
 
     public function setId(int $id)
@@ -37,22 +29,22 @@ class ShopProduct
         return "$this->title ($this->firstName $this->mainName)";
     }
 
-    public function getPrice()
+    public function getPrice() : int|float
     {
         return $this->price;
     }
 
-    public function getTitle()
+    public function getTitle() : string
     {
         return $this->title;
     }
 
-    public function setDiscount(float $num)
+    public function setDiscount(int|float $num)
     {
         $this->discount = $num;
     }
 
-    public function getDiscount() : float
+    public function getDiscount() : int|float
     {
         return $this->discount;
     }
