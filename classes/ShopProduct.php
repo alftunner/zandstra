@@ -1,7 +1,9 @@
 <?php
 
-class ShopProduct
+class ShopProduct implements Chargeable
 {
+    use PriceUtilities;
+
     private $id = 0;
     private int|float $discount = 0;
 
@@ -10,9 +12,7 @@ class ShopProduct
         private string $firstName,
         private string $mainName,
         protected int|float $price
-    )
-    {
-    }
+    ){}
 
     public function setId(int $id)
     {
@@ -86,5 +86,10 @@ class ShopProduct
             $product->setDiscount($row['discount']);
         }
         return $product;
+    }
+
+    public function __toString(): string
+    {
+        return "Название: $this->title | Цена: $this->price";
     }
 }

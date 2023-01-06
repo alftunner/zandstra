@@ -19,4 +19,9 @@ class BookProduct extends ShopProduct
     {
         return parent::getSummaryLine() . " : Количество страниц - $this->numPages";
     }
+
+    public function __toString(): string
+    {
+        return parent::__toString() . " | Количество страниц: $this->numPages";
+    }
 }

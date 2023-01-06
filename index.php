@@ -3,9 +3,12 @@ spl_autoload_register(function($name) {
     require 'classes/'.$name.'.php';
 });
 
+$saleProcess = new SaleProcess();
+$product = new BookProduct('test', 'Test', 'Testov', 15.2, 10);
+$saleProcess->registerCallbacks(CallbackPractice::saleInfo(2));
+$saleProcess->useThisCallbacks($product);
+$saleProcess->useThisCallbacks($product);
 
-$student = new Student('Oleg', 22, 5, '1234');
-$student1 = new Student('Nikolay', 23, 4, '1234');
 
-$student->getStudentInfo();
-$student1->getStudentInfo();
+//$pdo = DBConnection::getInstance();
+//$test = ShopProduct::getInstance(1, $pdo);
