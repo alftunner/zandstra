@@ -27,13 +27,3 @@ require_once 'vendor/autoload.php';
 <div class="formResult"></div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
