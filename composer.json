@@ -1,0 +1,19 @@
+{
+  "name": "vendor_name/zandstra",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "alexissherstnyov",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+  },
+  "autoload": {
+    "psr-4": {
+      "TaskManager\\": "TaskManager/"
+    }
+  }
+}
